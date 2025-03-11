@@ -2,14 +2,19 @@ import Product from "../models/product.model.js";
 import User from "../models/user.model.js";
 import cloudinary from "../lib/cloudinary.js";
 import path from "path";
-import { use } from "bcrypt/promises.js";
+
+
+const rootPath = path.join(process.env.UPLOAD_FILE_PATH,"inventory");
 
 export const addProducts = async (req, res, next) => {
   console.log(req);
-  const { image, productName, price, description, category } = req.body;
-  console.log(image, productName, price, description, category);
+  const { productName, price, description, category } = req.body;
+  console.log( productName, price, description, category);
   try {
-    if (!productName || !price || !category) {
+    console.log("Require File ",req.file);
+    const image = req.file?`${rootPath}/${req.file.filename}`:null;
+
+    if (!productName || !price || !category || !image) {
       const error = new Error("Please Fill out all the details");
       error.statuscode = 400;
       next(error);
@@ -22,8 +27,16 @@ export const addProducts = async (req, res, next) => {
       return;
     }
 
+    console.log("Sending to Cloudinary: ",image);
+    const uploadImage = await cloudinary.uploader.upload(image,{
+      folder:"Product_Image"
+    })
+
+    console.log("File Uploaded to cloudinary: ",uploadImage);
+    const finalImage = uploadImage.secure_url;
+
     const addProduct = await Product.create({
-      image: image,
+      image:finalImage,
       productName: productName,
       price: price,
       description: description,

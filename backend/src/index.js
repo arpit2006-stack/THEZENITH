@@ -5,8 +5,8 @@ import productRoutes from "./routes/product.routes.js";
 import bodyParser from "body-parser";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { addProducts } from "./controller/product.controller.js";
 import cartRoutes from "./routes/cart.routes.js";
+import path from "path";
 
 const app = express();
 
@@ -17,12 +17,17 @@ app.use(
   })
 );
 
+const rootPath = path.join(process.env.UPLOAD_FILE_PATH, "inventory");
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use("/inventory", express.static(rootPath));
+
 app.use(cookieParser());
 
 app.use("/api/user", userRoutes);
-app.use("/api/admin", addProducts);
+app.use("/api/admin", productRoutes);
 app.use("/api/user", cartRoutes);
 
 app.use((err, req, res, next) => {
