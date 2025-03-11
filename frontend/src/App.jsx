@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import  { AuthForm } from "./pages/signup.jsx";
 
-import { ProductForm } from "./pages/addproduct.jsx";
+import { AddProduct } from "./pages/addproduct.jsx";
 import Home from "./pages/home.jsx";
 import Navbar from "./components/navbar.jsx";
 import Footer from "./components/footer.jsx";
@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<AuthForm />} />
-          <Route path="/admin" element={<ProductForm />} />
+          <Route path="/admin" element={<AddProduct />} />
         </Routes>
       </BrowserRouter>
       <Footer/>

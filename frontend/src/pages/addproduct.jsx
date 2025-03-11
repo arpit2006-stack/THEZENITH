@@ -1,117 +1,103 @@
 import { useState } from "react";
-import axios from '../lib/axios.jsx'
+import axios from "../lib/axios.jsx";
 
-export const ProductForm=()=> {
-  const [formData, setFormData] = useState({
-    image: "",
+export const AddProduct=()=> {
+  const [product, setProduct] = useState({
     productName: "",
     price: "",
     description: "",
     category: "",
+    image: null,
   });
 
-  const [message, setMessage] = useState("");
+  const [preview, setPreview] = useState(null);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setProduct({ ...product, [name]: value });
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setProduct({ ...product, image: file });
+
+    // Preview Image
+    const reader = new FileReader();
+    reader.onloadend = () => setPreview(reader.result);
+    reader.readAsDataURL(file);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("productName", product.productName);
+    formData.append("price", product.price);
+    formData.append("description", product.description);
+    formData.append("category", product.category);
+    formData.append("image", product.image);
 
     try {
-      const response = await axios.post("/api/admin/addProducts",formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+      const response = await axios.post("/api/admin/addProducts", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setMessage("✅ Product added successfully!");
-        setFormData({
-          image: "",
-          productName: "",
-          price: "",
-          description: "",
-          category: "",
-        });
-      } else {
-        setMessage(`❌ ${data.message}`);
-      }
+      alert(response.data.message);
     } catch (error) {
-      setMessage("❌ Something went wrong!");
+      console.error("Error adding product:", error);
+      alert("Error adding product");
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
-        <h2 className="text-2xl font-bold mb-6 text-center">
-          Add New Product
-        </h2>
-        {message && (
-          <div className="mb-4 text-center text-sm text-red-500">
-            {message}
-          </div>
-        )}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            name="image"
-            placeholder="Image URL"
-            value={formData.image}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-lg"
-          />
-          <input
-            type="text"
-            name="productName"
-            placeholder="Product Name *"
-            value={formData.productName}
-            onChange={handleChange}
-            required
-            className="w-full p-3 border rounded-lg"
-          />
-          <input
-            type="number"
-            name="price"
-            placeholder="Price *"
-            value={formData.price}
-            onChange={handleChange}
-            required
-            min="0"
-            className="w-full p-3 border rounded-lg"
-          />
-          <textarea
-            name="description"
-            placeholder="Description"
-            value={formData.description}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-lg"
-          />
-          <input
-            type="text"
-            name="category"
-            placeholder="Category *"
-            value={formData.category}
-            onChange={handleChange}
-            required
-            className="w-full p-3 border rounded-lg"
-          />
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
-          >
-            Add Product
-          </button>
-        </form>
-      </div>
+    <div className="max-w-lg mx-auto mt-10 bg-white p-6 rounded-lg shadow-lg">
+      <h2 className="text-2xl font-bold text-gray-800 mb-4">Add Product</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          type="text"
+          name="productName"
+          placeholder="Product Name"
+          value={product.productName}
+          onChange={handleChange}
+          className="w-full p-2 border rounded"
+          required
+        />
+        <input
+          type="number"
+          name="price"
+          placeholder="Price"
+          value={product.price}
+          onChange={handleChange}
+          className="w-full p-2 border rounded"
+          required
+        />
+        <textarea
+          name="description"
+          placeholder="Description"
+          value={product.description}
+          onChange={handleChange}
+          className="w-full p-2 border rounded"
+          required
+        />
+        <input
+          type="text"
+          name="category"
+          placeholder="Category"
+          value={product.category}
+          onChange={handleChange}
+          className="w-full p-2 border rounded"
+          required
+        />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          className="w-full p-2 border rounded"
+          required
+        />
+        {preview && <img src={preview} alt="Preview" className="mt-2 w-full h-48 object-cover rounded-lg" />}
+        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+          Add Product
+        </button>
+      </form>
     </div>
   );
 }

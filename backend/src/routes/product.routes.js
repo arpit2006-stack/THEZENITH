@@ -27,7 +27,7 @@ const storage = multer.diskStorage({
     limits: { fileSize: 10 * 1024 * 1024 },
   });
 
-router.post("/addProducts", TokenGuard,upload.single("image"), addProducts);
+router.post("/addProducts",upload.single("image"), addProducts);
 
 router.post("/editProducts", TokenGuard, editProducts);
 

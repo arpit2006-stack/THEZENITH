@@ -12,9 +12,9 @@ export const addProducts = async (req, res, next) => {
   console.log( productName, price, description, category);
   try {
     console.log("Require File ",req.file);
-    const image = req.file?`${rootPath}/${req.file.filename}`:null;
+    const image = req.file ? req.file.path : null;
 
-    if (!productName || !price || !category || !image) {
+    if (!productName || !price || !category) {
       const error = new Error("Please Fill out all the details");
       error.statuscode = 400;
       next(error);
@@ -34,9 +34,8 @@ export const addProducts = async (req, res, next) => {
 
     console.log("File Uploaded to cloudinary: ",uploadImage);
     const finalImage = uploadImage.secure_url;
-
     const addProduct = await Product.create({
-      image:finalImage,
+      image: finalImage,
       productName: productName,
       price: price,
       description: description,
