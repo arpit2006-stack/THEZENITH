@@ -17,10 +17,12 @@ const LoginForm = () => {
 
       alert(response.data.message);
       navigate("/");
+      
     } catch (error) {
       console.error(error);
       alert(error.response?.data?.message || "An error occurred.");
     }
+    
     // setMessage("Login successful!");
   };
 
