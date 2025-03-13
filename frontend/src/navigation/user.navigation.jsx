@@ -8,6 +8,7 @@ import Footer from "../components/footer.jsx";
 import Home from "../pages/home.jsx";
 
 import  { AuthForm } from "../pages/signup.jsx";
+import LoginForm from '../pages/login.jsx';
 
 const UserLayout = () => {
   return (
@@ -16,6 +17,7 @@ const UserLayout = () => {
         <Routes>
            <Route path="/" element={<Home />} />
            <Route path="/signup" element={<AuthForm />} />
+           <Route path='/login' element={<LoginForm />} />
         </Routes>
       <Footer/>
     </div>
