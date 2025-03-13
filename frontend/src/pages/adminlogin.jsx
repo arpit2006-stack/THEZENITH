@@ -1,34 +1,32 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from '../lib/axios.jsx';
+import axios from "../lib/axios"; // Ensure the correct axios import
 
-export const AdminLogin = () => {
+const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-   try {
-         const response = await axios.post("/api/user/adminlogin", { email, password });
-   
-         alert(response.data.message);
-         navigate("/admin/addProducts");
-       } catch (error) {
-         console.error(error);
-         alert(error.response?.data?.message || "An error occurred.");
-       }
-       // setMessage("Login successful!");
-     };
+
+    try {
+      const response = await axios.post("/api/user/adminlogin", { email, password });
+
+      alert(response.data.message);
+      navigate("/admin/adminpanel"); // Navigate after successful login
+    } catch (error) {
+      console.error("Login Error:", error);
+      setError(error.response?.data?.message || "An error occurred.");
+    }
+  };
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-bold text-center mb-4">Admin Login</h2>
-        {error && <p className="text-red-500 text-center">{error}</p>}
+        {error && <p className="text-red-500 text-center">{error}</p>} {/* Display error messages */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-gray-700">Email</label>
@@ -62,4 +60,4 @@ export const AdminLogin = () => {
   );
 };
 
-
+export default AdminLogin;
