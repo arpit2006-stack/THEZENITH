@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "../../lib/axios.jsx";
 
-const AddProduct=()=> {
+const AddProduct = () => {
   const [product, setProduct] = useState({
     productName: "",
     price: "",
@@ -11,6 +11,7 @@ const AddProduct=()=> {
   });
 
   const [preview, setPreview] = useState(null);
+  const defaultImage = "https://via.placeholder.com/180x180?text=No+Image";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,58 +49,87 @@ const AddProduct=()=> {
   };
 
   return (
-    <div className="max-w-lg mx-auto  mt-10 bg-white p-6  ">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">Add Product</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="productName"
-          placeholder="Product Name"
-          value={product.productName}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
-        />
-        <input
-          type="number"
-          name="price"
-          placeholder="Price"
-          value={product.price}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
-        />
-        <textarea
-          name="description"
-          placeholder="Description"
-          value={product.description}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
-        />
-        <input
-          type="text"
-          name="category"
-          placeholder="Category"
-          value={product.category}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
-        />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          className="w-full p-2 border rounded"
-          required
-        />
-        {preview && <img src={preview} alt="Preview" className="mt-2 w-full h-48 object-cover rounded-lg" />}
-        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-          Add Product
-        </button>
+    <div className="bg-transparent p-2 ">
+      <h2 className="text-4xl font-bold text-gray-800 mb-4 text-center">Add New Product</h2>
+      <form onSubmit={handleSubmit} className="space-y-4 flex">
+        <div className="w-180 h-48 object-cover rounded-lg">
+          {/* Image Preview */}
+          <img
+            src={preview || defaultImage}
+            alt="Preview"
+            className="w-full h-60 object-cover mb-10 rounded-lg"
+          />
+
+          {/* File Upload */}
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="mt-3 w-full p-2 border border-gray-300 rounded-lg cursor-pointer"
+            required
+          />
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="mt-3 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+          >
+            Add Product
+          </button>
+        </div>
+
+        <div>
+          <input
+            type="text"
+            name="productName"
+            placeholder="Product Name"
+            value={product.productName}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            required
+          />
+
+          {/* Price */}
+          <input
+            type="number"
+            name="price"
+            placeholder="Price"
+            value={product.price}
+            onChange={handleChange}
+            min="0"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            required
+          />
+
+          {/* Description */}
+          <textarea
+            name="description"
+            placeholder="Description"
+            value={product.description}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            required
+          />
+
+          {/* Category Dropdown */}
+          <select
+            name="category"
+            value={product.category}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            required
+          >
+            <option value="">Select Category</option>
+            <option value="tshirt">Tshirt</option>
+            <option value="shirt">Shirt</option>
+            <option value="hoodies">Hoodies</option>
+            <option value="watches">Watches</option>
+            <option value="shoes">Shoes</option>
+          </select>
+        </div>
       </form>
     </div>
   );
-}
+};
 
 export default AddProduct;
