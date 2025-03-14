@@ -8,7 +8,7 @@ function AdminLayout() {
   return (
     <Routes>
       <Route path="/" element={<AdminLogin />} />
-      <Route path="/adminpanel" element={<AdminPanel />} />
+      <Route path="/adminpanel/*" element={<AdminPanel />} />
     </Routes>
   );
 }
