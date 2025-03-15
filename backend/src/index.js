@@ -8,9 +8,11 @@ import cookieParser from "cookie-parser";
 import cartRoutes from "./routes/cart.routes.js";
 import path from "path";
 
+import User from './models/user.model.js';
 import Product from "./models/product.model.js";
 
 import categoryRoutes from "./routes/category.routes.js";
+
 
 
 const app = express();
@@ -39,6 +41,15 @@ app.get('/getproducts', async (req, res) => {
   try {
     const products = await Product.find();
     res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: 'Server Error' });
+  }
+});
+
+app.get('/allUsers', async (req, res) => {
+  try {
+    const AllUser = await User.find();
+    res.json(AllUser);
   } catch (error) {
     res.status(500).json({ message: 'Server Error' });
   }
