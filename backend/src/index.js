@@ -7,6 +7,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import cartRoutes from "./routes/cart.routes.js";
 import path from "path";
+import categoryRoutes from "./routes/category.routes.js";
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use(cookieParser());
 app.use("/api/user", userRoutes);
 app.use("/api/admin", productRoutes);
 app.use("/api/user", cartRoutes);
+app.use("/api/user", categoryRoutes);
 
 app.use((err, req, res, next) => {
   console.log(err.stack);
