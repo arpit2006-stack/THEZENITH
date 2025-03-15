@@ -7,6 +7,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import cartRoutes from "./routes/cart.routes.js";
 import path from "path";
+import Product from "./models/product.model.js";
 
 const app = express();
 
@@ -27,7 +28,18 @@ app.use("/inventory", express.static(rootPath));
 app.use(cookieParser());
 
 app.use("/api/user", userRoutes);
+
 app.use("/api/admin", productRoutes);
+
+app.get('/getproducts', async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: 'Server Error' });
+  }
+});
+
 app.use("/api/user", cartRoutes);
 
 app.use((err, req, res, next) => {

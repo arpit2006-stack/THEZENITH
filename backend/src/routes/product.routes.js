@@ -1,5 +1,5 @@
 import express from "express";
-import { addProducts, editProducts } from "../controller/product.controller.js";
+import { addProducts, editProducts,  } from "../controller/product.controller.js";
 import { TokenGuard } from "../middleware/user.middleware.js";
 import path from 'path'
 import multer from 'multer';
@@ -30,5 +30,7 @@ const storage = multer.diskStorage({
 router.post("/addProducts",TokenGuard,upload.single("image"), addProducts);
 
 router.post("/editProducts", TokenGuard, editProducts);
+
+
 
 export default router;
