@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import { TiShoppingCart } from "react-icons/ti";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -105,8 +107,9 @@ const Navbar = () => {
             Shirt
           </a>
           <a href="/t-shirt" className="bg-gray-50 px-17 py-1 rounded hover:bg-gray-200">
-            T-Shirt
+          T-Shirt
           </a>
+          
           <a href="/hoodies" className="bg-gray-50 px-17 py-1 rounded hover:bg-gray-200">
             Hoodies
           </a>

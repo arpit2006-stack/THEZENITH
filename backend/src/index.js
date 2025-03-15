@@ -7,7 +7,11 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import cartRoutes from "./routes/cart.routes.js";
 import path from "path";
+<<<<<<< HEAD
 import Product from "./models/product.model.js";
+=======
+import categoryRoutes from "./routes/category.routes.js";
+>>>>>>> 5c486e71ffdf307cf46bc3b32cfe0c3bd38b0f66
 
 const app = express();
 
@@ -41,6 +45,7 @@ app.get('/getproducts', async (req, res) => {
 });
 
 app.use("/api/user", cartRoutes);
+app.use("/api/user", categoryRoutes);
 
 app.use((err, req, res, next) => {
   console.log(err.stack);

@@ -9,6 +9,7 @@ import Home from "../pages/home.jsx";
 
 import  { AuthForm } from "../pages/signup.jsx";
 import LoginForm from '../pages/login.jsx';
+import Tshirts from '../pages/t-shirts.jsx';
 
 const UserLayout = () => {
   return (
@@ -18,6 +19,7 @@ const UserLayout = () => {
            <Route path="/" element={<Home />} />
            <Route path="/signup" element={<AuthForm />} />
            <Route path='/login' element={<LoginForm />} />
+           <Route path='/t-shirt' element={<Tshirts/>} />
         </Routes>
       <Footer/>
     </div>
