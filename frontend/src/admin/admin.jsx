@@ -18,7 +18,7 @@ const AdminPanel = () => {
         <Navbar />
         <main className="p-5 w-full h-full bg-gray-200">
           <Routes>
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/" element={<Dashboard />} />
             <Route path="/products" element={<Product />} />
             <Route path="/customers" element={<Customer />} />
             <Route path="/orders" element={<Orders />} />

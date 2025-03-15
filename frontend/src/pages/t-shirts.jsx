@@ -6,7 +6,7 @@ const Tshirts = () => {
 
   useEffect(() => {
     axios
-      .get("/api/user/productsfind")
+      .get("/api/user/findtshirt")
       .then((response) => {
         console.log("API Response:", response.data);
         setTShirt(response.data.tshirts || []); // Ensure it’s an array

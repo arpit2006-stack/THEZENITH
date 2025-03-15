@@ -8,7 +8,7 @@ const Sidebar = () => {
 
       {/* Navigation Links */}
       <nav className="flex flex-col space-y-4">
-        <a href="/admin/adminpanel/dashboard" className="flex items-center gap-3 rounded hover:bg-gray-700">
+        <a href="/admin/adminpanel/" className="flex items-center gap-3 rounded hover:bg-gray-700">
           <FaTachometerAlt /> Dashboard
         </a>
         <a href="/admin/adminpanel/products" className="flex items-center gap-3 rounded hover:bg-gray-700">

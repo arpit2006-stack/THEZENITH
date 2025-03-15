@@ -1,8 +1,16 @@
 import express from "express";
-import { Tshirt } from "../controller/category.controller.js";
+import { Tshirt, Shirt, Shoes, Watches, Hoodies } from "../controller/category.controller.js";
 
 const router = express.Router();
 
-router.get("/productsfind", Tshirt);
+router.get("/findtshirt", Tshirt);
+
+router.get("/findshirt", Shirt);
+
+router.get("/findshoes", Shoes);
+
+router.get("/findwatches", Watches);
+
+router.get("/findhoodies", Hoodies);
 
 export default router;

@@ -9,7 +9,12 @@ import Home from "../pages/home.jsx";
 
 import  { AuthForm } from "../pages/signup.jsx";
 import LoginForm from '../pages/login.jsx';
+
 import Tshirts from '../pages/t-shirts.jsx';
+import Shirt from '../pages/shirt.jsx';
+import Shoes from '../pages/shoes.jsx';
+import Watches from '../pages/watches.jsx';
+import Hoodies from '../pages/hoodeies.jsx';
 
 const UserLayout = () => {
   return (
@@ -20,6 +25,10 @@ const UserLayout = () => {
            <Route path="/signup" element={<AuthForm />} />
            <Route path='/login' element={<LoginForm />} />
            <Route path='/t-shirt' element={<Tshirts/>} />
+           <Route path='/Shirts' element={<Shirt/>} />
+           <Route path='/Hoodies' element={<Hoodies/>} />
+           <Route path='/Watches' element={<Watches/>} />
+           <Route path='/Shoes' element={<Shoes/>} />
         </Routes>
       <Footer/>
     </div>
