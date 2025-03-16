@@ -33,6 +33,7 @@ const AddProduct = () => {
     const formData = new FormData();
     formData.append("productName", product.productName);
     formData.append("price", product.price);
+    formData.append("Quantity", product.Quantity);
     formData.append("description", product.description);
     formData.append("category", product.category);
     formData.append("image", product.image);
@@ -50,9 +51,9 @@ const AddProduct = () => {
 
   return (
     <div className="bg-transparent p-2 ">
-      <h2 className="text-4xl font-bold text-gray-800 mb-4 text-center">Add New Product</h2>
+      <h2 className="text-4xl font-bold text-gray-800 mb-7 text-center">Add New Product</h2>
       <form onSubmit={handleSubmit} className="space-y-4 flex">
-        <div className="w-180 h-48 object-cover rounded-lg">
+        <div className="w-180 h-48 mr-2 object-cover rounded-lg mt-2">
           {/* Image Preview */}
           <img
             src={preview || defaultImage}
@@ -78,18 +79,19 @@ const AddProduct = () => {
           </button>
         </div>
 
-        <div>
+        <div className="mt-0">
           <input
             type="text"
             name="productName"
             placeholder="Product Name"
             value={product.productName}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="mt-2 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             required
           />
 
-          {/* Price */}
+          <div>
+            {/* Price */}
           <input
             type="number"
             name="price"
@@ -97,26 +99,31 @@ const AddProduct = () => {
             value={product.price}
             onChange={handleChange}
             min="0"
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="mt-2 w-1/2 p-3  border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             required
           />
 
-          {/* Description */}
-          <textarea
-            name="description"
-            placeholder="Description"
-            value={product.description}
+          {/* Quantity */}
+          <input
+            type="number"
+            name="Quantity"
+            placeholder="Quantity"
+            value={product.Quantity}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            min="0"
+            className="mt-2 w-1/2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             required
           />
 
+
+          </div>
+          
           {/* Category Dropdown */}
           <select
             name="category"
             value={product.category}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="mt-2 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             required
           >
             <option value="">Select Category</option>
@@ -126,6 +133,16 @@ const AddProduct = () => {
             <option value="watches">Watches</option>
             <option value="shoes">Shoes</option>
           </select>
+
+          {/* Description */}
+          <textarea
+            name="description"
+            placeholder="Description"
+            value={product.description}
+            onChange={handleChange}
+            className="mt-2 w-full p-3 border h-55 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            required
+          />
         </div>
       </form>
     </div>

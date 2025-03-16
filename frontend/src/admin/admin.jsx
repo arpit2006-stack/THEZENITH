@@ -16,7 +16,7 @@ const AdminPanel = () => {
       <Sidebar />
       <div className="flex flex-col flex-1">
         <Navbar />
-        <main className="p-5 w-full h-full bg-gray-200">
+        <main className="p-2 w-full h-full bg-gray-200">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/products" element={<Product />} />

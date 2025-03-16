@@ -8,20 +8,20 @@ const rootPath = path.join(process.env.UPLOAD_FILE_PATH,"inventory");
 
 export const addProducts = async (req, res, next) => {
   console.log(req);
-  const { productName, price, description, category } = req.body;
-  console.log( productName, price, description, category);
+  const { productName, price, Quantity, description, category } = req.body;
+  console.log( productName, price, Quantity, description, category);
   try {
     console.log("Require File ",req.file);
     const image = req.file ? req.file.path : null;
 
-    if (!productName || !price || !category) {
+    if (!productName || !price || !category || !Quantity) {
       const error = new Error("Please Fill out all the details");
       error.statuscode = 400;
       next(error);
       return;
     }
-    if (price < 0) {
-      const error = new Error("Please Enter a valid Price");
+    if (price < 0 || Quantity < 0) {
+      const error = new Error("Please Enter a valid Price & Quantity");
       error.statuscode = 400;
       next(error);
       return;
@@ -38,6 +38,7 @@ export const addProducts = async (req, res, next) => {
       image: finalImage,
       productName: productName,
       price: price,
+      Quantity: Quantity,
       description: description,
       category: category,
     });
