@@ -7,13 +7,11 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import cartRoutes from "./routes/cart.routes.js";
 import path from "path";
-
-import User from './models/user.model.js';
+import viewProduct from "./routes/viewproduct.routes.js";
+import User from "./models/user.model.js";
 import Product from "./models/product.model.js";
 
 import categoryRoutes from "./routes/category.routes.js";
-
-
 
 const app = express();
 
@@ -37,15 +35,16 @@ app.use("/api/user", userRoutes);
 
 app.use("/api/admin", productRoutes);
 
-app.get('/getproducts', async (req, res) => {
+app.get("/getproducts", async (req, res) => {
   try {
     const products = await Product.find();
     res.json(products);
   } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
+    res.status(500).json({ message: "Server Error" });
   }
 });
 
+<<<<<<< HEAD
 app.get("/api/admin/getProduct/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -59,6 +58,11 @@ app.get("/api/admin/getProduct/:id", async (req, res) => {
   }
 });
 
+=======
+<<<<<<< HEAD
+app.get("/allUsers", async (req, res) => {
+=======
+>>>>>>> cef81eff31c2202e3bcc3e09a3558458512f9bdf
 
 app.delete('/deleteproduct', async (req, res) => {
   const { id } = req.body;
@@ -78,16 +82,18 @@ app.delete('/deleteproduct', async (req, res) => {
 
 
 app.get('/allUsers', async (req, res) => {
+>>>>>>> 768b98940464e02f1ab258605b2dd497f1b317b9
   try {
     const AllUser = await User.find();
     res.json(AllUser);
   } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
+    res.status(500).json({ message: "Server Error" });
   }
 });
 
 app.use("/api/user", cartRoutes);
 app.use("/api/user", categoryRoutes);
+app.use("/api/user", viewProduct);
 
 app.use((err, req, res, next) => {
   console.log(err.stack);

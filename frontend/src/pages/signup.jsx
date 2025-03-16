@@ -11,6 +11,7 @@ export const AuthForm = () => {
   });
   const [message, setMessage] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,8 +34,10 @@ export const AuthForm = () => {
       setMessage(data.message);
       if (isLogin) {
         localStorage.setItem("auth", "true");
-        navigate("/")
+        navigate("/");
         setIsAuthenticated(true);
+      } else {
+        setShowModal(true); 
       }
     } catch (error) {
       setMessage(error.response?.data?.message || "Something went wrong");
@@ -114,6 +117,25 @@ export const AuthForm = () => {
           </div>
         )}
       </div>
+
+  
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <h2 className="text-lg font-bold mb-4">Signup Successful!</h2>
+            <p className="mb-4">You have successfully signed up. Please log in.</p>
+            <button
+              onClick={() => {
+                setShowModal(false);
+                setIsLogin(true);
+              }}
+              className="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
-};
+}
