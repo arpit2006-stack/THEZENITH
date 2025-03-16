@@ -44,7 +44,29 @@ app.get("/getproducts", async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 app.get("/allUsers", async (req, res) => {
+=======
+
+app.delete('/deleteproduct', async (req, res) => {
+  const { id } = req.body;
+  try {
+     const product = await Product.findByIdAndDelete(id);
+     
+     if (!product) {
+        return res.status(404).json({ message: "Product not found" });
+     }
+
+     res.status(200).json({ message: "The Product was deleted successfully", product });
+  } catch (error) {
+     res.status(500).json({ message: 'Server Error', error: error.message });
+  }
+});
+
+
+
+app.get('/allUsers', async (req, res) => {
+>>>>>>> 768b98940464e02f1ab258605b2dd497f1b317b9
   try {
     const AllUser = await User.find();
     res.json(AllUser);
