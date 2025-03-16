@@ -44,7 +44,7 @@ app.get("/getproducts", async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
+
 app.get("/api/admin/getProduct/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -58,11 +58,11 @@ app.get("/api/admin/getProduct/:id", async (req, res) => {
   }
 });
 
-=======
-<<<<<<< HEAD
-app.get("/allUsers", async (req, res) => {
-=======
->>>>>>> cef81eff31c2202e3bcc3e09a3558458512f9bdf
+
+
+
+
+
 
 app.delete('/deleteproduct', async (req, res) => {
   const { id } = req.body;
@@ -82,7 +82,7 @@ app.delete('/deleteproduct', async (req, res) => {
 
 
 app.get('/allUsers', async (req, res) => {
->>>>>>> 768b98940464e02f1ab258605b2dd497f1b317b9
+
   try {
     const AllUser = await User.find();
     res.json(AllUser);
