@@ -9,6 +9,7 @@ import Customer from "../admin/pages/costomer";
 import Orders from "../admin/pages/orders";
 import Product from "../admin/pages/products";
 import AddProducts from "../admin/pages/addproduct";
+import Updateproduct from "../admin/pages/updateproduct";
 
 const AdminPanel = () => {
   return (
@@ -23,6 +24,7 @@ const AdminPanel = () => {
             <Route path="/customers" element={<Customer />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/addproduct" element={<AddProducts />} />
+            <Route path="/getProduct/:id" element={<Updateproduct />} />
           </Routes>
         </main>
       </div>

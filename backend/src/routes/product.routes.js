@@ -29,7 +29,7 @@ const storage = multer.diskStorage({
 
 router.post("/addProducts",TokenGuard,upload.single("image"), addProducts);
 
-router.post("/editProducts", TokenGuard, editProducts);
+router.put("/editProducts",editProducts);
 
 
 

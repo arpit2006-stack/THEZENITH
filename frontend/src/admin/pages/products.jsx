@@ -3,7 +3,7 @@ import axios from "../../lib/axios.jsx";
 import { FcPrevious, FcNext } from "react-icons/fc";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
-
+import { Link } from "react-router-dom";
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,9 +67,9 @@ const Products = () => {
             <p className="w-28 text-center">{product.category}</p>
             <p className="w-20 text-center">{product.Quantity}</p>
             <p className="w-20 text-center font-bold">${product.price}</p>
-            <button className="w-20 flex items-center justify-center gap-1 text-gray-500 hover:text-gray-900">
-              <FaRegEdit /> Edit
-            </button>
+            <Link to={`/admin/adminpanel/getProduct/${product._id}`} className="w-20 flex items-center justify-center gap-1 text-blue-600 hover:text-blue-900">
+            <FaRegEdit /> Edit
+            </Link>
 
             {/* Delete Button */}
             <button

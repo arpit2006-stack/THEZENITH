@@ -52,57 +52,50 @@ export const addProducts = async (req, res, next) => {
 
 export const editProducts = async (req, res, next) => {
   try {
-    const { image: newImage } = req.body;
-    const { productName: newProductName } = req.body;
-    const { price: newPrice } = req.body;
-    const { description: newDescription } = req.body;
-    const { category: newCategory } = req.body;
+    const { productID, 
+      
+      image: newImage,
+       productName: newProductName, 
+       price: newPrice, 
+       description: newDescription, 
+       category: newCategory 
+      
+      } = req.body;
 
-    const userID = req.user._id;
-    const user = await User.findById({ userID });
-    if (!user) {
-      const error = new Error("Access Denied");
-      error.statuscode = 403;
-      next(error);
-      return;
-    }
-
-    const productID = req.product._id;
-    const product = await Product.findById({ productID });
+    // Find product by ID
+    const product = await Product.findById(productID);
     if (!product) {
-      const error = new Error("No Such Product");
-      error.statuscode = 400;
-      next(error);
-      return;
+      return res.status(400).json({ message: "No Such Product" });
     }
 
+    // Check if anything has changed
     if (
-      newImage === Product.image &&
-      newProductName === Product.productName &&
-      newPrice === Product.price &&
-      newDescription === Product.description &&
-      newCategory === Product.category
+      newImage === product.image &&
+      newProductName === product.productName &&
+      newPrice === product.price &&
+      newDescription === product.description &&
+      newCategory === product.category
     ) {
-      const error = new Error("Nothing to Change");
-      error.statuscode = 400;
-      next(error);
-      return;
+      return res.status(400).json({ message: "Nothing to Change" });
     }
 
+    // Update product
     await Product.findByIdAndUpdate(
       productID,
-      { image: newImage },
-      { productName: newProductName },
-      { price: newPrice },
-      { description: newDescription },
-      { category: newCategory }
+      {
+        image: newImage,
+        productName: newProductName,
+        price: newPrice,
+        description: newDescription,
+        category: newCategory,
+      },
+      { new: true } // Return updated document
     );
 
-    res
-      .status(200)
-      .json({ message: "Details Successfully updated of product" });
+    res.status(200).json({ message: "Product details successfully updated" });
   } catch (error) {
     next(error);
   }
 };
+
 

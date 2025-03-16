@@ -37,17 +37,29 @@ const AddProduct = () => {
     formData.append("description", product.description);
     formData.append("category", product.category);
     formData.append("image", product.image);
-
+  
     try {
       const response = await axios.post("/api/admin/addProducts", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert(response.data.message);
+  
+      // Reset form state
+      setProduct({
+        productName: "",
+        price: "",
+        description: "",
+        category: "",
+        image: null,
+        Quantity: "", // Include Quantity in reset
+      });
+      setPreview(null); // Reset image preview
     } catch (error) {
       console.error("Error adding product:", error);
       alert("Error adding product");
     }
   };
+  
 
   return (
     <div className="bg-transparent p-2 ">
