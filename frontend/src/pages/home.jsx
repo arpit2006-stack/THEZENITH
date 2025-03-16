@@ -20,6 +20,13 @@ import cardtwo3 from "../assets/cardtwo3.jpg"
 import cardtwo4 from "../assets/cardtwo4.jpg"
 import cardtwo5 from "../assets/cardtwo5.jpg"
 import cardtwo6 from "../assets/cardtwo6.jpg"
+import watch1 from "../assets/watch1.jpg"
+import watch2 from "../assets/watch2.jpg"
+import watch3 from "../assets/watch3.jpg"
+import watch4 from "../assets/watch4.jpg"
+import watch5 from "../assets/watch5.jpg"
+import watch6 from "../assets/watch6.jpg"
+import watch7 from "../assets/watch7.jpg"
 
 const Home = () => {
   const threeCards = [
@@ -35,6 +42,16 @@ const Home = () => {
     { title: "Card 3", description: "This is the third card's description.", image: cardtwo3 },
     { title: "Card 4", description: "This is the fourth card's description.", image: cardtwo4 },
     { title: "Card 5", description: "This is the fourth card's description.", image: cardtwo6 },
+  ];
+
+  const sCards = [
+    { title: "Card 1", description: "This is the first card's description.", image: watch1 },
+    { title: "Card 1", description: "This is the first card's description.", image: watch2 },
+    { title: "Card 1", description: "This is the first card's description.", image: watch3 },
+    { title: "Card 2", description: "This is the second card's description.", image: watch4 },
+    { title: "Card 3", description: "This is the third card's description.", image: watch5},
+    { title: "Card 4", description: "This is the fourth card's description.", image: watch6 },
+    { title: "Card 5", description: "This is the fourth card's description.", image: watch7 },
   ];
 
   const fiveCards = [...threeCards, { title: "Card 5", description: "This is the fifth card's description.", image: Image4 }];
@@ -153,14 +170,43 @@ const Home = () => {
           <h1>DRIP DROP</h1>
         </div>
 
-    <div className="grid grid-cols-1 ml-20 md:grid-cols-5 gap-65 max-w-4xl">
+    <div className="grid grid-cols-1 mt-10 ml-20 md:grid-cols-5 gap-65 max-w-4xl">
           {fiveCards.map((card, index) => (
             <div key={index} className="bg-white w-62 rounded shadow-lg overflow-hidden p-0 hover:scale-102">
               <img src={card.image} alt={card.title} className="w-full h-88 object-cover rounded-lg" />
             </div>
           ))}
         </div>
-      {/* </div> */}
+
+
+        {/* <Wrapper>
+      <h1 className="text-3xl font-bold mb-6">BE INSPIRED BE ZENITH</h1>
+      <div className="flex gap-2 overflow-hidden w-11/12">
+        {Images.map((img, index) => (
+          <img
+            key={index}
+            className="w-full h-96 object-cover rounded-lg border-2 border-black transition-all duration-200 ease-in-out hover:w-[200%]"
+            src={Image1}
+            alt={`Gallery Image ${index + 1}`}
+          />
+        ))}
+      </div>
+    </Wrapper> */}
+     <div className="font-bold text-center mt-20 text-4xl">
+          <h1>THE <span className="text-red-600"> WRIST </span> SHOWCASE</h1>
+        </div>
+
+      <div className="flex mt-20 mb-20 ml-19 gap-5 p-0">
+        <div className="grid md:grid-cols-7 gap-5 max-w-full">
+          {sCards.map((card, index) => (
+            <div key={index} className="bg-white w-42 rounded shadow-lg overflow-hidden p-0 hover:scale-102">
+              <img src={card.image} alt={card.title} className="w-full h-68 object-cover rounded-lg" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+
 
     </>
   );
