@@ -51,14 +51,14 @@ const AddProduct = () => {
 
   return (
     <div className="bg-transparent p-2 ">
-      <h2 className="text-4xl font-bold text-gray-800 mb-7 text-center">Add New Product</h2>
+      <h2 className="text-4xl font-bold text-gray-800  text-center">Add New Product</h2>
       <form onSubmit={handleSubmit} className="space-y-4 flex">
-        <div className="w-180 h-48 mr-2 object-cover rounded-lg mt-2">
+        <div className="w-90 h-48 mr-2 object-cover rounded-lg mt-2">
           {/* Image Preview */}
           <img
             src={preview || defaultImage}
             alt="Preview"
-            className="w-full h-60 object-cover mb-10 rounded-lg"
+            className="w-90 h-90 justify-centre object-cover mb-1 rounded-lg"
           />
 
           {/* File Upload */}
@@ -79,7 +79,7 @@ const AddProduct = () => {
           </button>
         </div>
 
-        <div className="mt-0">
+        <div className="mt-0 w-full">
           <input
             type="text"
             name="productName"
@@ -90,7 +90,7 @@ const AddProduct = () => {
             required
           />
 
-          <div>
+          <div >
             {/* Price */}
           <input
             type="number"
@@ -140,7 +140,7 @@ const AddProduct = () => {
             placeholder="Description"
             value={product.description}
             onChange={handleChange}
-            className="mt-2 w-full p-3 border h-55 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="mt-2 w-full p-3 border h-76 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
